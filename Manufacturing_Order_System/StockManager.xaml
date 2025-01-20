@@ -1,0 +1,103 @@
+﻿<Window x:Class="Manufacturing_Order_System.StockManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:Manufacturing_Order_System"
+        mc:Ignorable="d" 
+        Title="StockManager" 
+        Height="450" 
+        Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <!-- 데이터 표시 Grid -->
+        <Grid x:Name="sm_TableGrid" Grid.Column="0" Background="White">
+            <DataGrid x:Name="sm_ProductDataGrid"
+                      AutoGenerateColumns="False"
+                      CanUserResizeColumns="False"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch"
+                      Margin="5,5,5,5"
+                      MaxHeight="400" 
+                      MaxWidth="800"
+                      RowHeight="30"
+                      IsReadOnly="True">
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="FontSize" Value="14"/>
+                    </Style>
+                </DataGrid.CellStyle>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="상태" Binding="{Binding 상태}" Width="50"/>
+                    <DataGridTextColumn Header="제품 종류" Binding="{Binding 제품종류}" Width="60"/>
+                    <DataGridTextColumn Header="제품 ID" Binding="{Binding 제품ID}" Width="60"/>
+                    <DataGridTextColumn Header="제품명" Binding="{Binding 제품명}" Width="60"/>
+                    <DataGridTextColumn Header="생산일자" Binding="{Binding 생산일자, StringFormat={}{0:yyyy-MM-dd}}" Width="90"/>
+                    <DataGridTextColumn Header="출고일자" Binding="{Binding 출고일자, StringFormat={}{0:yyyy-MM-dd}}" Width="90"/>
+                    <DataGridTextColumn Header="주문 ID" Binding="{Binding 주문ID}" Width="70"/>
+                    <DataGridTextColumn Header="불량 여부" Binding="{Binding 불량여부}" Width="60"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- 필터 및 옵션 -->
+        <Grid x:Name="sm_FilterGrid" Grid.Column="1" Background="#FFE4E4E4">
+            <StackPanel Margin="5">
+                <Label Content="제품명" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <CheckBox x:Name="sm_productA"
+                              IsChecked="True"
+                              Content="A"
+                              Margin="10,0,10,0" />
+                    <CheckBox x:Name="sm_productB"
+                              IsChecked="True"
+                              Content="B"
+                              Margin="10,0,10,0" />
+                    <CheckBox x:Name="sm_productC"
+                              IsChecked="True"
+                              Content="C"
+                              Margin="10,0,10,0" />
+                </StackPanel>
+                <Label Content="생산일자" FontSize="16" FontWeight="Bold" Margin="0,0,0,2"/>
+                <StackPanel Orientation="Horizontal" Margin="7,0,0,5">
+                    <DatePicker x:Name="sm_ManufactureDatePicker" Width="160" Height="25" SelectedDate="{Binding SelectedManufactureDate, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,23,10" HorizontalAlignment="Right">
+                    <Button x:Name="sm_MDPick_Button" Width="45" Height="20" Content="선택" Margin="5,0,0,0" Click="sm_MDPick_Button_Click"/>
+                    <Button x:Name="sm_MDReset_Button" Width="50" Height="20" Content="초기화" Margin="5,0,0,0" Click="sm_MDReset_Button_Click"/>
+                </StackPanel>
+                <Label Content="출고일자" FontSize="16" FontWeight="Bold" Margin="0,0,0,5"/>
+                <StackPanel Orientation="Horizontal" Margin="7,0,0,5">
+                    <DatePicker x:Name="sm_ShipmentDatePicker" Width="160" Height="25" SelectedDate="{Binding SelectedShipmentDate, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,23,10" HorizontalAlignment="Right">
+                    <Button x:Name="sm_SDPick_Button" Width="45" Height="20" Content="선택" Margin="5,0,0,0" Click="sm_SDPick_Button_Click"/>
+                    <Button x:Name="sm_SDReset_Button" Width="50" Height="20" Content="초기화" Margin="5,0,0,0" Click="sm_SDReset_Button_Click"/>
+                </StackPanel>
+                <Label Content="상태" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <CheckBox x:Name="sm_Unstoring"
+                                 Content="출고"
+                                 IsChecked="True"
+                                 Margin="10,0,0,0"/>
+                    <CheckBox x:Name="sm_Storing"
+                                 Content="미출고"
+                                 IsChecked="True"
+                                 Margin="10,0,0,0"/>
+                </StackPanel>
+                <Label Content="주문번호" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="sm_orderNum" Width="120" Height="22"
+                             HorizontalAlignment="Left" VerticalAlignment="Center"
+                             TextWrapping="Wrap" Margin="5,0,2,0"/>
+                    <Button x:Name="sm_searchOrderNum" Width="45" Height="22" Content="검색" Margin="2,0,0,0" Click="sm_searchOrderNum_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
