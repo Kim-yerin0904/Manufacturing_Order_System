@@ -18,6 +18,7 @@
     <Reference Include="MySql.Data">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\MySQL\Connector NET 8.0\Assemblies\v4.5.2\MySql.Data.dll</HintPath>
     </Reference>
+    <PackageReference Include="ScottPlot.WPF" Version="5.0.53" />
   </ItemGroup>
 
 </Project>
