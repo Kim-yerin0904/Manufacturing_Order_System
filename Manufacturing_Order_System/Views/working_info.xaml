@@ -44,9 +44,9 @@
                     <GridViewColumn Header="주문 ID" DisplayMemberBinding="{Binding OrderId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                     <GridViewColumn Header="고객 이름" DisplayMemberBinding="{Binding CustomerId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                     <GridViewColumn Header="주문 제품" DisplayMemberBinding="{Binding ProductTypeId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
-                    <GridViewColumn Header="주문 수량" DisplayMemberBinding="{Binding OrderQuantity}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="주문 수량" DisplayMemberBinding="{Binding OrderQuantity, Mode=OneWay}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                     <GridViewColumn Header="납기일" DisplayMemberBinding="{Binding OrderDueDate}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
-                    <GridViewColumn Header="주문 상태" DisplayMemberBinding="{Binding OrderStatus}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="주문 상태" DisplayMemberBinding="{Binding OrderStatus, Mode=OneWay}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -58,7 +58,7 @@
                 <GridView>
                     <GridViewColumn Header="작업 ID" DisplayMemberBinding="{Binding TaskId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                     <GridViewColumn Header="담당 팀" DisplayMemberBinding="{Binding TaskteamId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
-                    <GridViewColumn Header="작업 수량" DisplayMemberBinding="{Binding TaskCompletedQuantity}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="작업 수량" DisplayMemberBinding="{Binding TaskCompletedQuantity , Mode=OneWay}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -32,82 +32,88 @@ namespace Manufacturing_Order_System.Views
             manager.Initialize();
             viewModel = new WorkingInfoViewModel();
             DataContext = viewModel;
-            Loaded += Workinginfo_Loaded;
-            
+        }
+
+        public WorkingInfo(int selected_orderid)
+        {
+            InitializeComponent();
+            manager.Initialize();
+            viewModel = new WorkingInfoViewModel(selected_orderid);
+            DataContext = viewModel;
         }
   
-        private void Workinginfo_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (manager.OpenMySqlConnection() == true)
-            {
-                // 주문 정보 가져오기
-                MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter();
-                mySqlDataAdapter.SelectCommand = new MySqlCommand("select * from wpf.order where order_id=3;", App.connection);
-                viewModel.orders.Clear();
-                DataTable dataTable = new DataTable();
-                mySqlDataAdapter.Fill(dataTable);
+        //private void Workinginfo_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    if (manager.OpenMySqlConnection() == true)
+        //    {
+        //        // 주문 정보 가져오기
+        //        MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter();
+        //        mySqlDataAdapter.SelectCommand = new MySqlCommand("select * from wpf.order where order_id=3;", App.connection);
+        //        viewModel.orders.Clear();
+        //        DataTable dataTable = new DataTable();
+        //        mySqlDataAdapter.Fill(dataTable);
 
-                foreach (DataRow row in dataTable.Rows)
-                {
-                    viewModel.orders.Add(new Models.Order
-                    {
-                        OrderId = Convert.ToInt32(row["order_id"]),
-                        CustomerId = Convert.ToInt32(row["customer_id"]),
-                        ProductTypeId = Convert.ToInt32(row["product_type_id"]),
-                        OrderQuantity = Convert.ToInt32(row["order_quantity"]),
-                        OrderDate = row["order_date"] != DBNull.Value
-                            ? DateTime.Parse(row["order_date"].ToString())
-                            : default,
-                        OrderDueDate = row["order_duedate"] != DBNull.Value
-                               ? DateOnly.FromDateTime(DateTime.Parse(row["order_duedate"].ToString()))
-                               : default,
-                        OrderStatus = Convert.ToInt32(row["order_status"]),
-                        OrderReceiptDate = row["order_receipt_date"] != DBNull.Value
-                                   ? DateTime.Parse(row["order_receipt_date"].ToString())
-                                   : default
-                    });
-                }
+        //        foreach (DataRow row in dataTable.Rows)
+        //        {
+        //            viewModel.orders.Add(new Models.Order
+        //            {
+        //                OrderId = Convert.ToInt32(row["order_id"]),
+        //                CustomerId = Convert.ToInt32(row["customer_id"]),
+        //                ProductTypeId = Convert.ToInt32(row["product_type_id"]),
+        //                OrderQuantity = Convert.ToInt32(row["order_quantity"]),
+        //                OrderDate = row["order_date"] != DBNull.Value
+        //                    ? DateTime.Parse(row["order_date"].ToString())
+        //                    : default,
+        //                OrderDueDate = row["order_duedate"] != DBNull.Value
+        //                       ? DateOnly.FromDateTime(DateTime.Parse(row["order_duedate"].ToString()))
+        //                       : default,
+        //                OrderStatus = Convert.ToInt32(row["order_status"]),
+        //                OrderReceiptDate = row["order_receipt_date"] != DBNull.Value
+        //                           ? DateTime.Parse(row["order_receipt_date"].ToString())
+        //                           : default
+        //            });
+        //        }
 
-                // 작업 정보 가져오기
-                mySqlDataAdapter.SelectCommand = new MySqlCommand("select * from wpf.task where order_id=3;", App.connection); 
-                viewModel.tasks.Clear();
-                dataTable.Clear();
-                mySqlDataAdapter.Fill(dataTable);
+        //        // 작업 정보 가져오기
+        //        mySqlDataAdapter.SelectCommand = new MySqlCommand("select * from wpf.task where order_id=3;", App.connection); 
+        //        viewModel.tasks.Clear();
+        //        dataTable.Clear();
+        //        mySqlDataAdapter.Fill(dataTable);
 
-                foreach (DataRow row in dataTable.Rows)
-                {
-                    viewModel.tasks.Add(new Models.Task
-                    {
-                        TaskId = Convert.ToInt32(row["task_id"]),
-                        OrderId = Convert.ToInt32(row["order_id"]),
-                        TaskProductionQuantity = Convert.ToInt32(row["task_production_quantity"]),
-                        TaskCompletedQuantity = Convert.ToInt32(row["task_completed_quantity"]),
-                        TaskteamId = Convert.ToInt32(row["taskteam_id"])
-                    });
-                }
+        //        foreach (DataRow row in dataTable.Rows)
+        //        {
+        //            viewModel.tasks.Add(new Models.Task
+        //            {
+        //                TaskId = Convert.ToInt32(row["task_id"]),
+        //                OrderId = Convert.ToInt32(row["order_id"]),
+        //                TaskProductionQuantity = Convert.ToInt32(row["task_production_quantity"]),
+        //                TaskCompletedQuantity = Convert.ToInt32(row["task_completed_quantity"]),
+        //                TaskteamId = Convert.ToInt32(row["taskteam_id"])
+        //            });
+        //        }
 
-                //작업자 정보 가져오기
-                mySqlDataAdapter.SelectCommand = new MySqlCommand("select * from wpf.worker where taskteam_id=1;", App.connection);
-                viewModel.workers.Clear();
-                dataTable.Clear();
-                mySqlDataAdapter.Fill(dataTable);
+        //        //작업자 정보 가져오기
+        //        mySqlDataAdapter.SelectCommand = new MySqlCommand("select * from wpf.worker where taskteam_id=1;", App.connection);
+        //        viewModel.workers.Clear();
+        //        dataTable.Clear();
+        //        mySqlDataAdapter.Fill(dataTable);
 
-                foreach (DataRow row in dataTable.Rows)
-                {
-                    viewModel.workers.Add(new Worker
-                    {
-                        Id = Convert.ToInt32(row["worker_id"]),
-                        Name = row["worker_name"].ToString(),
-                        Contact = row["worker_contact"].ToString(),
-                        Email = row["worker_email"] != DBNull.Value
-                        ? row["worker_email"].ToString() : default,
-                        WorkerPosition = row["worker_position"].ToString(),
+        //        foreach (DataRow row in dataTable.Rows)
+        //        {
+        //            viewModel.workers.Add(new Worker
+        //            {
+        //                Id = Convert.ToInt32(row["worker_id"]),
+        //                Name = row["worker_name"].ToString(),
+        //                Contact = row["worker_contact"].ToString(),
+        //                Email = row["worker_email"] != DBNull.Value
+        //                ? row["worker_email"].ToString() : default,
+        //                WorkerPosition = row["worker_position"].ToString(),
 
-                    });
-                }
-                App.connection.Close();
-            }
-        }
+        //            });
+        //        }
+        //        App.connection.Close();
+        //    }
+        //}
 
         private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
