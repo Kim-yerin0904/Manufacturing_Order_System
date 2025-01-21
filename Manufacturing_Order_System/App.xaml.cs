@@ -11,6 +11,11 @@ namespace Manufacturing_Order_System
     public partial class App : Application
     {
         public static MySqlConnection connection;
+
+        //db 결과 여부
+        public static bool DataSaveResult;
+        public static bool DataSearchResult;
+        
     }
 
 }
