@@ -48,16 +48,22 @@ namespace Manufacturing_Order_System.Views
         {
             try
             {
-                string query = "SELECT Status AS 상태, ProductTypeID AS 제품종류, ProductID AS 제품ID, ProductName AS 제품명, " +
-                               "ManufactureDate AS 생산일자, ShipmentDate AS 출고일자, OrderID AS 주문ID, " +
-                               "CASE WHEN IsDefective = 0 THEN 'X' ELSE 'O' END AS 불량여부 " +
-                               "FROM stock_manager1";
-
-                //string query = "SELECT CASE WHEN p.product_shipping_status = 1 THEN '출고' ELSE '미출고' END AS 상태, " +
-                //    "pt.product_type_name AS 제품종류, p.product_id AS 제품ID, pt.product_type_name AS 제품명, " +
-                //    "p.product_manufacture_date AS 생산일자, p.product_shipping_date AS 출고일자, p.order_id AS 주문ID," +
-                //    " CASE WHEN p.product_defective_status = 1 THEN '불량' ELSE '정상' END AS 불량여부 FROM" +
-                //    " product JOIN product_type pt ON p.product_type_id = pt.product_type_id;";
+                string query = @"
+            SELECT 
+                p.product_shipping_status AS 상태,
+                pt.product_type_id AS 제품종류,
+                p.product_id AS 제품ID,
+                pt.product_type_name AS 제품명,
+                p.product_manufacture_date AS 생산일자,
+                p.product_shipping_date AS 출고일자,
+                o.order_id AS 주문ID,
+                CASE 
+                    WHEN p.product_defective_status = 0 THEN 'X'
+                    ELSE 'O'
+                END AS 불량여부
+            FROM wpf.product p
+            JOIN wpf.product_type pt ON p.product_type_id = pt.product_type_id
+            JOIN wpf.order o ON p.order_id = o.order_id";
 
                 // 필터 추가
                 List<string> filters = new List<string>();
@@ -65,31 +71,31 @@ namespace Manufacturing_Order_System.Views
                 // 주문번호 필터
                 if (!string.IsNullOrEmpty(orderNumber))
                 {
-                    filters.Add($"OrderID = '{orderNumber}'");
+                    filters.Add($"o.order_id = {orderNumber}");
                 }
 
                 // 제품명 필터
                 if (!string.IsNullOrEmpty(productNameFilter))
                 {
-                    filters.Add($"ProductName IN ({productNameFilter})");
+                    filters.Add($"pt.product_type_name IN ({productNameFilter})");
                 }
 
                 // 상태 필터
                 if (!string.IsNullOrEmpty(statusFilter))
                 {
-                    filters.Add($"Status IN ({statusFilter})");
+                    filters.Add($"p.product_shipping_status IN ({statusFilter})");
                 }
 
                 // 생산일자 필터
                 if (manufactureDate.HasValue)
                 {
-                    filters.Add($"ManufactureDate = '{manufactureDate.Value:yyyy-MM-dd}'");
+                    filters.Add($"p.product_manufacture_date = '{manufactureDate.Value:yyyy-MM-dd}'");
                 }
 
                 // 출고일자 필터
                 if (shipmentDate.HasValue)
                 {
-                    filters.Add($"ShipmentDate = '{shipmentDate.Value:yyyy-MM-dd}'");
+                    filters.Add($"p.product_shipping_date = '{shipmentDate.Value:yyyy-MM-dd}'");
                 }
 
                 if (filters.Count > 0)
@@ -97,8 +103,7 @@ namespace Manufacturing_Order_System.Views
                     query += " WHERE " + string.Join(" AND ", filters);
                 }
 
-                // 제품 ID 정렬 추가
-                query += " ORDER BY ProductID ASC";
+                query += " ORDER BY p.product_id ASC";
 
                 MySqlCommand cmd = new MySqlCommand(query, App.connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
