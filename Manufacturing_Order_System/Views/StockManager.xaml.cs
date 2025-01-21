@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 
-namespace Manufacturing_Order_System
+namespace Manufacturing_Order_System.Views
 {
     public partial class StockManager : Window
     {

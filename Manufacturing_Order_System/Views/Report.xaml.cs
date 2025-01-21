@@ -24,7 +24,7 @@ using Microsoft.Win32;
 
 namespace Manufacturing_Order_System
 {
-    public partial class Report : Window
+    public partial class Report : Page
     {
         MySQLManager manager = new MySQLManager();
         private ReportViewModel viewModel;

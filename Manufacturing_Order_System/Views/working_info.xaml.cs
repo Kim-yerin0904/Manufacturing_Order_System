@@ -21,7 +21,7 @@ namespace Manufacturing_Order_System.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class WorkingInfo : Window
+    public partial class WorkingInfo : Page
     {
         MySQLManager manager = new MySQLManager();
         private WorkingInfoViewModel viewModel;
@@ -124,23 +124,20 @@ namespace Manufacturing_Order_System.Views
 
                     case "workinginfo_menu":
                         // 작업 정보 페이지로 이동
-                        var workingInfoPage = new WorkingInfo(); // WorkingInfoWindow는 새 페이지
-                        workingInfoPage.Show();
-                        this.Close(); // 현재 창 닫기
+                        WorkingInfo workinginfo = new WorkingInfo();
+                        NavigationService.Navigate(workinginfo);
                         break;
 
-                    //case "stocklist_menu":
-                    //    // 재고 목록 페이지로 이동
-                    //    var stockListPage = new StockListWindow(); // StockListWindow는 새 페이지
-                    //    stockListPage.Show();
-                    //    this.Close(); // 현재 창 닫기
-                    //    break;
+                    case "stocklist_menu":
+                        // 재고 목록 페이지로 이동
+                        StockManager stockmanager = new StockManager();
+                        NavigationService.Navigate(stockmanager);
+                        break;
 
                     case "dailyreport_menu":
                         // 일일 실적 페이지로 이동
-                        var dailyReportPage = new Report(); // DailyReportWindow는 새 페이지
-                        dailyReportPage.Show();
-                        this.Close(); // 현재 창 닫기
+                        Report report = new Report();
+                        NavigationService.Navigate(report);
                         break;
 
                     default:
