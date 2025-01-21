@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Manufacturing_Order_System.Views
 {
-    public partial class StockManager : Window
+    public partial class StockManager : Page
     {
         private readonly MySQLManager mySQLManager = new MySQLManager();
 
@@ -40,7 +40,7 @@ namespace Manufacturing_Order_System.Views
             sm_Unstoring.Unchecked += FilterProductsAndStatus;
             sm_Storing.Unchecked += FilterProductsAndStatus;
 
-            this.Closed += StockManager_Closed;
+            this.Unloaded += StockManager_Closed;
         }
 
         // MySQL 데이터를 DataGrid에 로드
@@ -52,6 +52,12 @@ namespace Manufacturing_Order_System.Views
                                "ManufactureDate AS 생산일자, ShipmentDate AS 출고일자, OrderID AS 주문ID, " +
                                "CASE WHEN IsDefective = 0 THEN 'X' ELSE 'O' END AS 불량여부 " +
                                "FROM stock_manager1";
+
+                //string query = "SELECT CASE WHEN p.product_shipping_status = 1 THEN '출고' ELSE '미출고' END AS 상태, " +
+                //    "pt.product_type_name AS 제품종류, p.product_id AS 제품ID, pt.product_type_name AS 제품명, " +
+                //    "p.product_manufacture_date AS 생산일자, p.product_shipping_date AS 출고일자, p.order_id AS 주문ID," +
+                //    " CASE WHEN p.product_defective_status = 1 THEN '불량' ELSE '정상' END AS 불량여부 FROM" +
+                //    " product JOIN product_type pt ON p.product_type_id = pt.product_type_id;";
 
                 // 필터 추가
                 List<string> filters = new List<string>();
