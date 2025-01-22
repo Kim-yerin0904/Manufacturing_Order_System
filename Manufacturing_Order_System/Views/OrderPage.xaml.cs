@@ -132,8 +132,6 @@ namespace Manufacturing_Order_System.Views
             }
         }
 
-
-
         private void ViewDetailsButton_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.Tag is int orderId)
@@ -220,7 +218,9 @@ namespace Manufacturing_Order_System.Views
                             ProductTypeName = reader.GetString("ProductTypeName"),
                             OrderQuantity = reader.GetInt32("OrderQuantity"),
                             OrderDueDate = reader.GetDateTime("OrderDueDate"),
-                            OrderReceiptDate = reader.GetDateTime("OrderReceiptDate"),
+                            OrderReceiptDate = reader.IsDBNull(reader.GetOrdinal("OrderReceiptDate"))
+                            ? "-"
+                            : reader.GetDateTime("OrderReceiptDate").ToString(),
                             OrderStatus = GetOrderStatusText(reader.GetInt32("OrderStatus")),
                             OrderDate = reader.GetDateTime("OrderDate")
                         });
