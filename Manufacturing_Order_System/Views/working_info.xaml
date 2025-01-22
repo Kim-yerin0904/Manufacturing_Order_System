@@ -6,14 +6,14 @@
         xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
         xmlns:local="clr-namespace:Manufacturing_Order_System.Views.UserControls"
         mc:Ignorable="d"
-        Title="작업 정보" Height="450" Width="800">
+        Title="작업 정보" Height="600" Width="900">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="700"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
@@ -37,8 +37,8 @@
         <Label Grid.Row="1" Grid.Column="0" Margin="25,0,0,0" Content="주문 별 작업 정보" Style="{StaticResource TitleStyle}"/>
         
         <!-- 주문 정보 표-->
-        <Label Grid.Row="1" Grid.Column="0" Margin="25,60,0,0" Content="[주문 정보]" Style="{StaticResource SubheadingStlye}"/>
-        <ListView Grid.Row="1" Grid.Column="0" x:Name="OrderInfo" ItemsSource="{Binding orders}" Margin="25,90,20,0" Style="{StaticResource workinginfoTableStyle}">
+        <Label Grid.Row="1" Grid.Column="0" Margin="45,60,0,0" Content="[주문 정보]" Style="{StaticResource SubheadingStlye}"/>
+        <ListView Grid.Row="1" Grid.Column="0" x:Name="OrderInfo" ItemsSource="{Binding orders}" Margin="45,90,20,0" Style="{StaticResource workinginfoTableStyle}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="주문 ID" DisplayMemberBinding="{Binding OrderId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
@@ -52,8 +52,8 @@
         </ListView>
 
         <!--작업 정보표-->
-        <Label Grid.Row="1" Grid.Column="0" Content="[작업 정보]" Margin="25,145,0,0" Style="{StaticResource SubheadingStlye}"/>
-        <ListView Grid.Row="1" Grid.Column="0" x:Name="WorkingTable" ItemsSource="{Binding tasks}" Margin="25,175,20,0" Style="{StaticResource workinginfoTableStyle}">
+        <Label Grid.Row="1" Grid.Column="0" Content="[작업 정보]" Margin="45,145,0,0" Style="{StaticResource SubheadingStlye}"/>
+        <ListView Grid.Row="1" Grid.Column="0" x:Name="WorkingTable" ItemsSource="{Binding tasks}" Margin="45,175,20,0" Style="{StaticResource workinginfoTableStyle}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="작업 ID" DisplayMemberBinding="{Binding TaskId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
@@ -64,8 +64,8 @@
         </ListView>
 
         <!--담당 팀 기본 정보표-->
-        <Label Grid.Row="1" Grid.Column="0" Content="[작업 팀 정보]" Margin="300,145,0,0" Style="{StaticResource SubheadingStlye}"/>
-        <ListView Grid.Row="1" Grid.Column="0" x:Name="TeamInfo" ItemsSource="{Binding workers}" Margin="300,175,20,0" Style="{StaticResource workinginfoTableStyle}">
+        <Label Grid.Row="1" Grid.Column="0" Content="[작업 팀 정보]" Margin="340,145,0,0" Style="{StaticResource SubheadingStlye}"/>
+        <ListView Grid.Row="1" Grid.Column="0" x:Name="TeamInfo" ItemsSource="{Binding workers}" Margin="340,175,20,0" Style="{StaticResource workinginfoTableStyle}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="이름" DisplayMemberBinding="{Binding Name}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>

@@ -6,7 +6,7 @@
       xmlns:vm="clr-namespace:Manufacturing_Order_System.ViewModels"
       xmlns:local="clr-namespace:Manufacturing_Order_System.Views.UserControls"
       mc:Ignorable="d" 
-      d:DesignHeight="900" d:DesignWidth="900"
+      d:DesignHeight="600" d:DesignWidth="900"
       Title="OrderPage">
 
     <Grid>

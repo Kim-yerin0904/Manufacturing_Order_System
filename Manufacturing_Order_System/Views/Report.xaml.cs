@@ -46,7 +46,11 @@ namespace Manufacturing_Order_System
             {
                 // 주문 정보 가져오기
                 MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter();
-                mySqlDataAdapter.SelectCommand = new MySqlCommand("select SUM(CASE WHEN product_type_id = 1 and product_manufacture_date = '2025-01-20' then 1 ELSE 0 END) AS ProductA,SUM(CASE WHEN product_type_id = 2 and product_manufacture_date = '2025-01-20' THEN 1 ELSE 0 END) AS ProductB,SUM(CASE WHEN product_defective_status = 1 AND product_type_id = 1 and product_manufacture_date = '2025-01-20' THEN 1 ELSE 0 END) AS DefectiveA,SUM(CASE WHEN product_defective_status = 1 AND product_type_id = 2 and product_manufacture_date = '2025-01-20' THEN 1 ELSE 0 END) AS DefectiveB from wpf.product;", App.connection);
+                mySqlDataAdapter.SelectCommand = new MySqlCommand("select SUM(CASE WHEN product_type_id = 1 and product_manufacture_date = '2025-01-20' then 1 ELSE 0 END) AS ProductA," +
+                    "SUM(CASE WHEN product_type_id = 2 and product_manufacture_date = '2025-01-20' THEN 1 ELSE 0 END) AS ProductB," +
+                    "SUM(CASE WHEN product_defective_status = 1 AND product_type_id = 1 and product_manufacture_date = '2025-01-20' THEN 1 ELSE 0 END) AS DefectiveA," +
+                    "SUM(CASE WHEN product_defective_status = 1 AND product_type_id = 2 and product_manufacture_date = '2025-01-20' THEN 1 ELSE 0 END) AS DefectiveB " +
+                    "from wpf.product;", App.connection);
                 viewModel.ProductTable.Clear();
                 DataTable dataTable = new DataTable();
                 mySqlDataAdapter.Fill(dataTable);

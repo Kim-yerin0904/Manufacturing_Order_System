@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Manufacturing_Order_System.ViewModels;
 using MySql.Data.MySqlClient;
+using System.Windows.Navigation;
 
 namespace Manufacturing_Order_System.Views
 {
@@ -27,7 +28,9 @@ namespace Manufacturing_Order_System.Views
         {
             if (sender is Button button && button.Tag is int orderId)
             {
-                MessageBox.Show(orderId.ToString());
+                // 작업 정보 페이지로 이동
+                WorkingInfo workinginfo = new(orderId);
+                NavigationService.GetNavigationService(this)?.Navigate(workinginfo);
             }
         }
 
