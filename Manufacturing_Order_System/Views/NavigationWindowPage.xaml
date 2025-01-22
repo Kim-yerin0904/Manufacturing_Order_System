@@ -5,5 +5,5 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Manufacturing_Order_System.Views"
         mc:Ignorable="d"
-        Title="생산/주문 관리 시스템" Height="450" Width="800" Source="OrderPage.xaml">
+        Title="생산/주문 관리 시스템" Height="670" Width="920" Source="OrderPage.xaml">
 </NavigationWindow>

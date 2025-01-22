@@ -25,7 +25,7 @@ namespace Manufacturing_Order_System.ViewModels
         private DateTime orderDueDate;
 
         [ObservableProperty]
-        private DateTime orderReceiptDate;
+        private string orderReceiptDate;
 
         [ObservableProperty]
         private string orderStatus;

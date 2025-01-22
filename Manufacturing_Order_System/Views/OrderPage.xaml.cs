@@ -73,7 +73,6 @@ namespace Manufacturing_Order_System.Views
             }
         }
 
-
         private void OnAcceptButtonClick(object sender, RoutedEventArgs e)
         {
             try
@@ -102,12 +101,13 @@ namespace Manufacturing_Order_System.Views
                     insertTaskCommand.Parameters.AddWithValue("@TaskteamId", taskteamId);
                     insertTaskCommand.ExecuteNonQuery();
 
-                    var updateOrderStatusQuery = @"
+                    var updateOrderStatusAndReceiptDateQuery = @"
                         UPDATE wpf.order
-                        SET order_status = 1
+                        SET order_status = 1, 
+                        order_receipt_date = NOW()
                         WHERE order_id = @OrderId";
 
-                    var updateOrderStatusCommand = new MySqlCommand(updateOrderStatusQuery, App.connection);
+                    var updateOrderStatusCommand = new MySqlCommand(updateOrderStatusAndReceiptDateQuery, App.connection);
                     updateOrderStatusCommand.Parameters.AddWithValue("@OrderId", orderId);
                     updateOrderStatusCommand.ExecuteNonQuery();
 
@@ -134,8 +134,6 @@ namespace Manufacturing_Order_System.Views
                 LoadTaskteams();
             }
         }
-
-
 
         private void ViewDetailsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -223,7 +221,9 @@ namespace Manufacturing_Order_System.Views
                             ProductTypeName = reader.GetString("ProductTypeName"),
                             OrderQuantity = reader.GetInt32("OrderQuantity"),
                             OrderDueDate = reader.GetDateTime("OrderDueDate"),
-                            OrderReceiptDate = reader.GetDateTime("OrderReceiptDate"),
+                            OrderReceiptDate = reader.IsDBNull(reader.GetOrdinal("OrderReceiptDate"))
+                            ? "-"
+                            : reader.GetDateTime("OrderReceiptDate").ToString(),
                             OrderStatus = GetOrderStatusText(reader.GetInt32("OrderStatus")),
                             OrderDate = reader.GetDateTime("OrderDate")
                         });
