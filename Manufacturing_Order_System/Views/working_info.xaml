@@ -42,8 +42,8 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="주문 ID" DisplayMemberBinding="{Binding OrderId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
-                    <GridViewColumn Header="고객 이름" DisplayMemberBinding="{Binding CustomerId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
-                    <GridViewColumn Header="주문 제품" DisplayMemberBinding="{Binding ProductTypeId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="고객 ID" DisplayMemberBinding="{Binding CustomerId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="주문 제품 ID" DisplayMemberBinding="{Binding ProductTypeId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                     <GridViewColumn Header="주문 수량" DisplayMemberBinding="{Binding OrderQuantity, Mode=OneWay}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                     <GridViewColumn Header="납기일" DisplayMemberBinding="{Binding OrderDueDate}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                     <GridViewColumn Header="주문 상태" DisplayMemberBinding="{Binding OrderStatus, Mode=OneWay}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>

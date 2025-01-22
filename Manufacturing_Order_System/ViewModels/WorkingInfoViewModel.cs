@@ -39,32 +39,32 @@ namespace Manufacturing_Order_System.ViewModels
             if (manager.OpenMySqlConnection() == true)
             {
                 // 주문 정보 가져오기
-                string query = "select * from wpf.order where order_id=" + selected_orderid + ";";
+                string query = "select * from wpf.order where order_id = "+ selected_orderid+"; ";
                 DataTable dataTable = manager.SqlExecute(query);
                 orders.Clear();
                 foreach (DataRow row in dataTable.Rows)
                 {
                     orders.Add(new Models.Order
                     {
-                        OrderId = Convert.ToInt32(row["order_id"]),
-                        CustomerId = Convert.ToInt32(row["customer_id"]),
-                        ProductTypeId = Convert.ToInt32(row["product_type_id"]),
-                        OrderQuantity = Convert.ToInt32(row["order_quantity"]),
-                        OrderDate = row["order_date"] != DBNull.Value
-                            ? DateTime.Parse(row["order_date"].ToString())
+                        OrderId = Convert.ToInt32(row["o.order_id"]),
+                        CustomerId = Convert.ToInt32(row["c.customer_name"]),
+                        ProductTypeId = Convert.ToInt32(row["pt.product_type_name"]),
+                        OrderQuantity = Convert.ToInt32(row["o.order_quantity"]),
+                        OrderDate = row["o.order_date"] != DBNull.Value
+                            ? DateTime.Parse(row["o.order_date"].ToString())
                             : default,
-                        OrderDueDate = row["order_duedate"] != DBNull.Value
-                               ? DateOnly.FromDateTime(DateTime.Parse(row["order_duedate"].ToString()))
+                        OrderDueDate = row["o.order_duedate"] != DBNull.Value
+                               ? DateOnly.FromDateTime(DateTime.Parse(row["o.order_duedate"].ToString()))
                                : default,
-                        OrderStatus = Convert.ToInt32(row["order_status"]),
-                        OrderReceiptDate = row["order_receipt_date"] != DBNull.Value
-                                   ? DateTime.Parse(row["order_receipt_date"].ToString())
+                        OrderStatus = Convert.ToInt32(row["o.order_status"]),
+                        OrderReceiptDate = row["o.order_receipt_date"] != DBNull.Value
+                                   ? DateTime.Parse(row["o.order_receipt_date"].ToString())
                                    : default
                     });
                 }
 
                 // 작업 정보 가져오기
-                query = "select * from wpf.task where order_id=3;";
+                query = "select * from wpf.task where order_id ="+ selected_orderid+";";
                 tasks.Clear();
                 dataTable.Clear();
                 dataTable = manager.SqlExecute(query);
