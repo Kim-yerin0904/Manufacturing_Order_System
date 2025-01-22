@@ -49,21 +49,24 @@ namespace Manufacturing_Order_System.Views
             try
             {
                 string query = @"
-            SELECT 
-                p.product_shipping_status AS 상태,
-                pt.product_type_id AS 제품종류,
-                p.product_id AS 제품ID,
-                pt.product_type_name AS 제품명,
-                p.product_manufacture_date AS 생산일자,
-                p.product_shipping_date AS 출고일자,
-                o.order_id AS 주문ID,
-                CASE 
-                    WHEN p.product_defective_status = 0 THEN 'X'
-                    ELSE 'O'
-                END AS 불량여부
-            FROM wpf.product p
-            JOIN wpf.product_type pt ON p.product_type_id = pt.product_type_id
-            JOIN wpf.order o ON p.order_id = o.order_id";
+                    SELECT 
+                        CASE 
+                            WHEN p.product_shipping_status = 1 THEN '출고'
+                            ELSE '미출고'
+                        END AS 상태,
+                        pt.product_type_id AS 제품종류,
+                        p.product_id AS 제품ID,
+                        pt.product_type_name AS 제품명,
+                        p.product_manufacture_date AS 생산일자,
+                        p.product_shipping_date AS 출고일자,
+                        o.order_id AS 주문ID,
+                        CASE 
+                            WHEN p.product_defective_status = 0 THEN 'X'
+                            ELSE 'O'
+                        END AS 불량여부
+                    FROM wpf.product p
+                    JOIN wpf.product_type pt ON p.product_type_id = pt.product_type_id
+                    JOIN wpf.order o ON p.order_id = o.order_id";
 
                 // 필터 추가
                 List<string> filters = new List<string>();
@@ -84,6 +87,10 @@ namespace Manufacturing_Order_System.Views
                 if (!string.IsNullOrEmpty(statusFilter))
                 {
                     filters.Add($"p.product_shipping_status IN ({statusFilter})");
+                }
+                else if (statusFilter == "NULL")
+                {
+                    filters.Add("1 = 0"); // 항상 거짓 조건을 추가하여 데이터를 반환하지 않음
                 }
 
                 // 생산일자 필터
@@ -126,12 +133,28 @@ namespace Manufacturing_Order_System.Views
             if (sm_productA.IsChecked == true) selectedProducts.Add("'A'");
             if (sm_productB.IsChecked == true) selectedProducts.Add("'B'");
             if (sm_productC.IsChecked == true) selectedProducts.Add("'C'");
+
+            // 제품명 체크박스가 모두 false일 경우 필터링된 데이터를 로드하지 않도록 설정
+            if (selectedProducts.Count == 0)
+            {
+                sm_ProductDataGrid.ItemsSource = null;
+                return;
+            }
+
             string productNameFilter = string.Join(",", selectedProducts);
 
             // 상태 필터링
             List<string> selectedStatuses = new List<string>();
-            if (sm_Unstoring.IsChecked == true) selectedStatuses.Add("'출고'");
-            if (sm_Storing.IsChecked == true) selectedStatuses.Add("'미출고'");
+            if (sm_Unstoring.IsChecked == true) selectedStatuses.Add("1");
+            if (sm_Storing.IsChecked == true) selectedStatuses.Add("0");
+
+            // 상태 체크박스가 모두 false일 경우 필터링된 데이터를 로드하지 않도록 설정
+            if (selectedStatuses.Count == 0)
+            {
+                sm_ProductDataGrid.ItemsSource = null;
+                return;
+            }
+
             string statusFilter = string.Join(",", selectedStatuses);
 
             // 생산일자, 출고일자 필터링
@@ -141,6 +164,7 @@ namespace Manufacturing_Order_System.Views
             // 필터링된 데이터 로드
             LoadDatabaseData(productNameFilter: productNameFilter, statusFilter: statusFilter, manufactureDate: manufactureDate, shipmentDate: shipmentDate);
         }
+
 
         private void sm_MDPick_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -205,7 +229,7 @@ namespace Manufacturing_Order_System.Views
             else
             {
                 // 주문 번호가 비어있다면 전체 데이터를 로드
-                FilterProductsAndStatus(sender, e);
+                LoadDatabaseData();
             }
         }
 
