@@ -23,6 +23,14 @@ namespace Manufacturing_Order_System.Views
             LoadTaskteams();
         }
 
+        private void TaskTeamButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.Tag is int orderId)
+            {
+                MessageBox.Show(orderId.ToString());
+            }
+        }
+
         private void OnRejectButtonClick(object sender, RoutedEventArgs e)
         {
             try
