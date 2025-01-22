@@ -18,6 +18,9 @@ namespace Manufacturing_Order_System.ViewModels
         public string Name { get; set; }
         public int ProductA { get; set; }
         public int ProductB { get; set; }
+        public int ProductC { get; set; }
+        public int ProductD { get; set; }
+        public int ProductE { get; set; }
     }
 
     public class RevenueData
@@ -25,6 +28,10 @@ namespace Manufacturing_Order_System.ViewModels
         public string Name { get; set; }
         public int ProductA { get; set; }
         public int ProductB { get; set; }
+        public int ProductC { get; set; }
+        public int ProductD { get; set; }
+        public int ProductE { get; set; }
+
     }
     public class ReportViewModel : ViewModelBase
     {
