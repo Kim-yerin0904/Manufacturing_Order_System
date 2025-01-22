@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Manufacturing_Order_System.Views.UserControls"
         mc:Ignorable="d" 
         Title="StockManager" 
-        Height="450" 
-        Width="800">
+        Height="600" 
+        Width="900">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
         <!--상단 메뉴바-->
         <local:MenuBar/>
@@ -25,11 +25,11 @@
             <DataGrid x:Name="sm_ProductDataGrid"
                       AutoGenerateColumns="False"
                       CanUserResizeColumns="False"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Stretch"
-                      Margin="5,5,5,5"
-                      MaxHeight="400" 
-                      MaxWidth="800"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Margin="20,5,5,5"
+                      MaxHeight="550" 
+                      MaxWidth="850"
                       RowHeight="30"
                       IsReadOnly="True">
                 <DataGrid.CellStyle>
@@ -71,7 +71,7 @@
                 </StackPanel>
                 <Label Content="생산일자" FontSize="16" FontWeight="Bold" Margin="0,0,0,2"/>
                 <StackPanel Orientation="Horizontal" Margin="7,0,0,5">
-                    <DatePicker x:Name="sm_ManufactureDatePicker" Width="160" Height="25" SelectedDate="{Binding SelectedManufactureDate, Mode=TwoWay}"/>
+                    <DatePicker x:Name="sm_ManufactureDatePicker" Width="260" Height="25" SelectedDate="{Binding SelectedManufactureDate, Mode=TwoWay}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,23,10" HorizontalAlignment="Right">
                     <Button x:Name="sm_MDPick_Button" Width="45" Height="20" Content="선택" Margin="5,0,0,0" Click="sm_MDPick_Button_Click"/>
@@ -79,7 +79,7 @@
                 </StackPanel>
                 <Label Content="출고일자" FontSize="16" FontWeight="Bold" Margin="0,0,0,5"/>
                 <StackPanel Orientation="Horizontal" Margin="7,0,0,5">
-                    <DatePicker x:Name="sm_ShipmentDatePicker" Width="160" Height="25" SelectedDate="{Binding SelectedShipmentDate, Mode=TwoWay}"/>
+                    <DatePicker x:Name="sm_ShipmentDatePicker" Width="260" Height="25" SelectedDate="{Binding SelectedShipmentDate, Mode=TwoWay}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,23,10" HorizontalAlignment="Right">
                     <Button x:Name="sm_SDPick_Button" Width="45" Height="20" Content="선택" Margin="5,0,0,0" Click="sm_SDPick_Button_Click"/>
@@ -98,7 +98,7 @@
                 </StackPanel>
                 <Label Content="주문번호" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" />
                 <StackPanel Orientation="Horizontal">
-                    <TextBox x:Name="sm_orderNum" Width="120" Height="22"
+                    <TextBox x:Name="sm_orderNum" Width="220" Height="22"
                              HorizontalAlignment="Left" VerticalAlignment="Center"
                              TextWrapping="Wrap" Margin="5,0,2,0"/>
                     <Button x:Name="sm_searchOrderNum" Width="45" Height="22" Content="검색" Margin="2,0,0,0" Click="sm_searchOrderNum_Click"/>

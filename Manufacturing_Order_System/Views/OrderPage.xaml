@@ -4,20 +4,26 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:vm="clr-namespace:Manufacturing_Order_System.ViewModels"
-      xmlns:local="clr-namespace:Manufacturing_Order_System.Views"
+      xmlns:local="clr-namespace:Manufacturing_Order_System.Views.UserControls"
       mc:Ignorable="d" 
-      d:DesignHeight="900" d:DesignWidth="900"
+      d:DesignHeight="600" d:DesignWidth="900"
       Title="OrderPage">
-
-
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <!--상단 메뉴바-->
+        <local:MenuBar/>
+        <!--주문 목록 테이블-->
         <DataGrid x:Name="OrderDataGrid" ItemsSource="{Binding Orders}" AutoGenerateColumns="False" 
-          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Grid.Column="0">
+          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Grid.Column="0" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="주문 ID" Binding="{Binding OrderId}" Width="*"/>
                 <DataGridTextColumn Header="고객 ID" Binding="{Binding CustomerId}" Width="*"/>
@@ -51,7 +57,7 @@
         </DataGrid>
 
         <!-- Details box -->
-        <Border Grid.Column="1" 
+        <Border Grid.Column="1"  Grid.Row="1"
         Background="White" 
         Margin="10" 
         CornerRadius="10"

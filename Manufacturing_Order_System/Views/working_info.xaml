@@ -6,14 +6,14 @@
         xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
         xmlns:local="clr-namespace:Manufacturing_Order_System.Views.UserControls"
         mc:Ignorable="d"
-        Title="작업 정보" Height="450" Width="800">
+        Title="작업 정보" Height="600" Width="900">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="700"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
@@ -22,13 +22,13 @@
 
         <!--작업 완성률-->
         <!--{Binding Value2, UpdateSourceTrigger=PropertyChanged}-->
-        <xrpb:RadialProgressBar Grid.Column="1" Grid.Row="1" Value= "{Binding SelectedTask.ProgressRate, UpdateSourceTrigger=PropertyChanged}"
+        <xrpb:RadialProgressBar Grid.Column="1" Grid.Row="1" Value= "{Binding ProgressbarPercent, UpdateSourceTrigger=PropertyChanged, Mode=Oneway}"
                                 VerticalAlignment="Top" Width="180" Height="180" Foreground="Blue"
                                 ArcWidth="45" OuterBackgroundBrush="White"/>
         <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,180,0,0" Text="진행률" Style="{StaticResource ProgressbarFontStlye}"/>
         <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,210,0,0" Style="{StaticResource ProgressbarFontStlye}">
             <!--{Binding Value2, UpdateSourceTrigger=PropertyChanged, Mode=Oneway}-->
-            <Run Text="{Binding SelectedTask.ProgressRate, UpdateSourceTrigger=PropertyChanged, Mode=Oneway}"/>
+            <Run Text="{Binding ProgressbarPercent, UpdateSourceTrigger=PropertyChanged, Mode=Oneway}"/>
             <Run Text="%"/>
         </TextBlock>
 
@@ -37,35 +37,35 @@
         <Label Grid.Row="1" Grid.Column="0" Margin="25,0,0,0" Content="주문 별 작업 정보" Style="{StaticResource TitleStyle}"/>
         
         <!-- 주문 정보 표-->
-        <Label Grid.Row="1" Grid.Column="0" Margin="25,60,0,0" Content="[주문 정보]" Style="{StaticResource SubheadingStlye}"/>
-        <ListView Grid.Row="1" Grid.Column="0" x:Name="OrderInfo" ItemsSource="{Binding orders}" Margin="25,90,20,0" Style="{StaticResource workinginfoTableStyle}">
+        <Label Grid.Row="1" Grid.Column="0" Margin="45,60,0,0" Content="[주문 정보]" Style="{StaticResource SubheadingStlye}"/>
+        <ListView Grid.Row="1" Grid.Column="0" x:Name="OrderInfo" ItemsSource="{Binding orders}" Margin="45,90,20,0" Style="{StaticResource workinginfoTableStyle}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="주문 ID" DisplayMemberBinding="{Binding OrderId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
-                    <GridViewColumn Header="고객 이름" DisplayMemberBinding="{Binding CustomerId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
-                    <GridViewColumn Header="주문 제품" DisplayMemberBinding="{Binding ProductTypeId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
-                    <GridViewColumn Header="주문 수량" DisplayMemberBinding="{Binding OrderQuantity}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="고객 ID" DisplayMemberBinding="{Binding CustomerId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="주문 제품 ID" DisplayMemberBinding="{Binding ProductTypeId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="주문 수량" DisplayMemberBinding="{Binding OrderQuantity, Mode=OneWay}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                     <GridViewColumn Header="납기일" DisplayMemberBinding="{Binding OrderDueDate}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
-                    <GridViewColumn Header="주문 상태" DisplayMemberBinding="{Binding OrderStatus}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="주문 상태" DisplayMemberBinding="{Binding OrderStatus, Mode=OneWay}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                 </GridView>
             </ListView.View>
         </ListView>
 
         <!--작업 정보표-->
-        <Label Grid.Row="1" Grid.Column="0" Content="[작업 정보]" Margin="25,145,0,0" Style="{StaticResource SubheadingStlye}"/>
-        <ListView Grid.Row="1" Grid.Column="0" x:Name="WorkingTable" ItemsSource="{Binding tasks}" Margin="25,175,20,0" Style="{StaticResource workinginfoTableStyle}">
+        <Label Grid.Row="1" Grid.Column="0" Content="[작업 정보]" Margin="45,145,0,0" Style="{StaticResource SubheadingStlye}"/>
+        <ListView Grid.Row="1" Grid.Column="0" x:Name="WorkingTable" ItemsSource="{Binding tasks}" Margin="45,175,20,0" Style="{StaticResource workinginfoTableStyle}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="작업 ID" DisplayMemberBinding="{Binding TaskId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                     <GridViewColumn Header="담당 팀" DisplayMemberBinding="{Binding TaskteamId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
-                    <GridViewColumn Header="작업 수량" DisplayMemberBinding="{Binding TaskCompletedQuantity}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="작업 수량" DisplayMemberBinding="{Binding TaskCompletedQuantity , Mode=OneWay}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                 </GridView>
             </ListView.View>
         </ListView>
 
         <!--담당 팀 기본 정보표-->
-        <Label Grid.Row="1" Grid.Column="0" Content="[작업 팀 정보]" Margin="300,145,0,0" Style="{StaticResource SubheadingStlye}"/>
-        <ListView Grid.Row="1" Grid.Column="0" x:Name="TeamInfo" ItemsSource="{Binding workers}" Margin="300,175,20,0" Style="{StaticResource workinginfoTableStyle}">
+        <Label Grid.Row="1" Grid.Column="0" Content="[작업 팀 정보]" Margin="340,145,0,0" Style="{StaticResource SubheadingStlye}"/>
+        <ListView Grid.Row="1" Grid.Column="0" x:Name="TeamInfo" ItemsSource="{Binding workers}" Margin="340,175,20,0" Style="{StaticResource workinginfoTableStyle}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="이름" DisplayMemberBinding="{Binding Name}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>

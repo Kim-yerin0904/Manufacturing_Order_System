@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Diagnostics;
+using System.Data;
 
 namespace Manufacturing_Order_System
 {
@@ -55,6 +56,15 @@ namespace Manufacturing_Order_System
                 Debug.WriteLine(e.Message);
                 return false;
             }
+        }
+
+        public DataTable SqlExecute(string query)
+        {
+            DataTable dataTable = new DataTable();
+            MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter();
+            mySqlDataAdapter.SelectCommand = new MySqlCommand(query,App.connection);
+            mySqlDataAdapter.Fill(dataTable);
+            return dataTable;
         }
     }
 }
