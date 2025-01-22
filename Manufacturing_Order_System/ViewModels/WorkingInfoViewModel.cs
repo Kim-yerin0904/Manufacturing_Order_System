@@ -18,6 +18,7 @@ namespace Manufacturing_Order_System.ViewModels
         public ObservableCollection<Models.Task> tasks { get; set; }
         public ObservableCollection<Taskteam> taskteams { get; set; }
         public ObservableCollection<Worker> workers { get; set; }
+
         private double _ProgressbarPercent;
         public double ProgressbarPercent
         {

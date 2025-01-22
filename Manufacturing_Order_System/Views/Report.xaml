@@ -16,7 +16,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="700"/>
+            <ColumnDefinition Width="600"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         
@@ -31,26 +31,32 @@
         </Button>
 
         <!--당일 생산량과 불량률 표-->
-        <Rectangle Grid.Row="2" Grid.Column="0" Fill="#E6E6E6" RadiusY="20" RadiusX="20" Margin="10,5,5,20" Width="685"/>
+        <Rectangle Grid.Row="2" Grid.Column="0" Fill="#E6E6E6" RadiusY="20" RadiusX="20" Margin="10,5,5,20" Width="585"/>
         <Label Grid.Row="2" Grid.Column="0" Content="일일 생산량, 불량률" HorizontalAlignment="Center" Style="{StaticResource SubheadingStlye}" Margin="0,10,0,0"/>
         <DataGrid x:Name="DailyProductTable" ItemsSource="{Binding ProductTable}" Grid.Row="2" Grid.Column="0" AutoGenerateColumns="False" HeadersVisibility="Column" IsReadOnly="True" Margin="20,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="   " Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="상품 A" Binding="{Binding ProductA}"/>
                 <DataGridTextColumn Header="상품 B" Binding="{Binding ProductB}"/>
+                <DataGridTextColumn Header="상품 C" Binding="{Binding ProductC}"/>
+                <DataGridTextColumn Header="상품 D" Binding="{Binding ProductD}"/>
+                <DataGridTextColumn Header="상품 E" Binding="{Binding ProductE}"/>
             </DataGrid.Columns>
         </DataGrid>
         
         <!--막대그래프-->
-        <ScottPlot:WpfPlot x:Name="barplot" Grid.Row="2" Grid.Column="0" Margin="200,50,20,80" />
+        <ScottPlot:WpfPlot x:Name="barplot" Grid.Row="2" Grid.Column="0" Margin="300,50,20,80" />
         
         <!--매출-->
         <Label Grid.Row="2" Grid.Column="1" Content="일 매출" HorizontalAlignment="Center" Style="{StaticResource SubheadingStlye}" Margin="0,10,0,0"/>
-        <DataGrid x:Name="DailySalesTable" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding revenueDatas}" AutoGenerateColumns="False" HeadersVisibility="Column" Margin="20,50,50,0" HorizontalAlignment="Right" VerticalAlignment="Top">
+        <DataGrid x:Name="DailySalesTable" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding revenueDatas}" AutoGenerateColumns="False" HeadersVisibility="Column" Margin="20,50,50,0" HorizontalAlignment="Left" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="   " Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="상품 A" Binding="{Binding ProductA}"/>
                 <DataGridTextColumn Header="상품 B" Binding="{Binding ProductB}"/>
+                <DataGridTextColumn Header="상품 C" Binding="{Binding ProductC}"/>
+                <DataGridTextColumn Header="상품 D" Binding="{Binding ProductD}"/>
+                <DataGridTextColumn Header="상품 E" Binding="{Binding ProductE}"/>
             </DataGrid.Columns>
         </DataGrid>
         

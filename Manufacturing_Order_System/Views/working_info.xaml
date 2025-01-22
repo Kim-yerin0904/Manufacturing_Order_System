@@ -58,7 +58,8 @@
                 <GridView>
                     <GridViewColumn Header="작업 ID" DisplayMemberBinding="{Binding TaskId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                     <GridViewColumn Header="담당 팀" DisplayMemberBinding="{Binding TaskteamId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
-                    <GridViewColumn Header="작업 수량" DisplayMemberBinding="{Binding TaskCompletedQuantity , Mode=OneWay}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="총 작업 수량" DisplayMemberBinding="{Binding TaskProductionQuantity}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="작업 완료 수량" DisplayMemberBinding="{Binding TaskCompletedQuantity , Mode=OneWay}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -160,7 +160,7 @@ namespace Manufacturing_Order_System.Views
             {
                 ViewModel.ProductCal.Clear();
 
-                int rt = (int)Math.Ceiling((double)inputQuantity / ViewModel.ProductInfo[0].ProductionTime);
+                int rt = (int)Math.Ceiling((double)inputQuantity / 100 * ViewModel.ProductInfo[0].ProductionTime);
                 int aq = rt * ViewModel.ProductInfo[0].ProductionTime;
 
                 ViewModel.ProductCal.Add(new ProductCalViewModel
@@ -204,7 +204,9 @@ namespace Manufacturing_Order_System.Views
                     JOIN 
                         wpf.product_type p 
                     ON 
-                        o.product_type_id = p.product_type_id";
+                        o.product_type_id = p.product_type_id
+                    ORDER BY
+                        o.order_status, o.order_id;";
 
                     var command = new MySqlCommand(query, App.connection);
                     using var reader = command.ExecuteReader();
