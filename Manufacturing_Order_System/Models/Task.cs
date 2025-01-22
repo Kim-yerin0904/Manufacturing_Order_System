@@ -13,16 +13,6 @@ namespace Manufacturing_Order_System.Models
         public int TaskProductionQuantity { get; set; }
         public int TaskCompletedQuantity { get; set; }
         public int TaskteamId { get; set; }
-    
-
-        public double ProgressRate
-        {
-            get
-            {
-                return TaskProductionQuantity > 0
-                    ? Math.Round((double)TaskCompletedQuantity / TaskProductionQuantity * 100, 2)
-                    : 0.0;
-            }
-        }
+   
     }
 }
