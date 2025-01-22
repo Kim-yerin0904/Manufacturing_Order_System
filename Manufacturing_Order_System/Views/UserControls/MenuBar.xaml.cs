@@ -39,7 +39,7 @@ namespace Manufacturing_Order_System.Views.UserControls
 
                     case "workinginfo_menu":
                         // 작업 정보 페이지로 이동
-                        WorkingInfo workinginfo = new WorkingInfo();
+                        WorkingInfo workinginfo = new(1);
                         NavigationService.GetNavigationService(this)?.Navigate(workinginfo);
                         break;
 

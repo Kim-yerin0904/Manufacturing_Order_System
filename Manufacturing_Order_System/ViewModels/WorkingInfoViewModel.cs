@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Manufacturing_Order_System.Models;
 using Manufacturing_Order_System.ViewModels.Bases;
 using MySql.Data.MySqlClient;
@@ -17,6 +18,13 @@ namespace Manufacturing_Order_System.ViewModels
         public ObservableCollection<Models.Task> tasks { get; set; }
         public ObservableCollection<Taskteam> taskteams { get; set; }
         public ObservableCollection<Worker> workers { get; set; }
+        private double _ProgressbarPercent;
+        public double ProgressbarPercent
+        {
+            get { return _ProgressbarPercent; }
+            set { _ProgressbarPercent = value; }
+        }
+
         MySQLManager manager = new MySQLManager();
 
 
@@ -26,6 +34,7 @@ namespace Manufacturing_Order_System.ViewModels
             tasks = new ObservableCollection<Models.Task>();
             taskteams = new ObservableCollection<Taskteam> { };
             workers = new ObservableCollection<Worker>();
+            
         }
 
         public WorkingInfoViewModel(int selected_orderid) : this() 
@@ -46,19 +55,19 @@ namespace Manufacturing_Order_System.ViewModels
                 {
                     orders.Add(new Models.Order
                     {
-                        OrderId = Convert.ToInt32(row["o.order_id"]),
-                        CustomerId = Convert.ToInt32(row["c.customer_name"]),
-                        ProductTypeId = Convert.ToInt32(row["pt.product_type_name"]),
-                        OrderQuantity = Convert.ToInt32(row["o.order_quantity"]),
-                        OrderDate = row["o.order_date"] != DBNull.Value
-                            ? DateTime.Parse(row["o.order_date"].ToString())
+                        OrderId = Convert.ToInt32(row["order_id"]),
+                        CustomerId = Convert.ToInt32(row["customer_id"]),
+                        ProductTypeId = Convert.ToInt32(row["product_type_id"]),
+                        OrderQuantity = Convert.ToInt32(row["order_quantity"]),
+                        OrderDate = row["order_date"] != DBNull.Value
+                            ? DateTime.Parse(row["order_date"].ToString())
                             : default,
-                        OrderDueDate = row["o.order_duedate"] != DBNull.Value
-                               ? DateOnly.FromDateTime(DateTime.Parse(row["o.order_duedate"].ToString()))
+                        OrderDueDate = row["order_duedate"] != DBNull.Value
+                               ? DateOnly.FromDateTime(DateTime.Parse(row["order_duedate"].ToString()))
                                : default,
-                        OrderStatus = Convert.ToInt32(row["o.order_status"]),
-                        OrderReceiptDate = row["o.order_receipt_date"] != DBNull.Value
-                                   ? DateTime.Parse(row["o.order_receipt_date"].ToString())
+                        OrderStatus = Convert.ToInt32(row["order_status"]),
+                        OrderReceiptDate = row["order_receipt_date"] != DBNull.Value
+                                   ? DateTime.Parse(row["order_receipt_date"].ToString())
                                    : default
                     });
                 }
@@ -78,10 +87,13 @@ namespace Manufacturing_Order_System.ViewModels
                         TaskCompletedQuantity = Convert.ToInt32(row["task_completed_quantity"]),
                         TaskteamId = Convert.ToInt32(row["taskteam_id"])
                     });
+                    ProgressbarPercent = Math.Round(Convert.ToDouble(Convert.ToInt32(row["task_completed_quantity"])) / Convert.ToDouble(Convert.ToInt32(row["task_production_quantity"])) * 100,1);
                 }
 
                 //작업자 정보 가져오기
-                query = "select * from wpf.worker where taskteam_id=1;";
+                query = "SELECT w.worker_id, w.worker_name, w.worker_position, w.worker_contact, w.worker_email " +
+                    "FROM `task` t JOIN `order` o ON t.order_id = o.order_id " +
+                    "JOIN `taskteam` tt ON t.taskteam_id = tt.taskteam_id JOIN `worker` w ON tt.taskteam_id = w.taskteam_id WHERE o.order_id =" + selected_orderid + ";";
                 workers.Clear();
                 dataTable.Clear();
                 dataTable = manager.SqlExecute(query);

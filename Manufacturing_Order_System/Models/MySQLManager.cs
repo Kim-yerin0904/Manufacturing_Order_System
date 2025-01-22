@@ -61,12 +61,9 @@ namespace Manufacturing_Order_System
         public DataTable SqlExecute(string query)
         {
             DataTable dataTable = new DataTable();
-            if (OpenMySqlConnection() == true)
-            {
-                MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter();
-                mySqlDataAdapter.SelectCommand = new MySqlCommand(query);
-                mySqlDataAdapter.Fill(dataTable);
-            }
+            MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter();
+            mySqlDataAdapter.SelectCommand = new MySqlCommand(query,App.connection);
+            mySqlDataAdapter.Fill(dataTable);
             return dataTable;
         }
     }

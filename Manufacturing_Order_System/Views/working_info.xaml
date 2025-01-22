@@ -22,13 +22,13 @@
 
         <!--작업 완성률-->
         <!--{Binding Value2, UpdateSourceTrigger=PropertyChanged}-->
-        <xrpb:RadialProgressBar Grid.Column="1" Grid.Row="1" Value= "{Binding SelectedTask.ProgressRate, UpdateSourceTrigger=PropertyChanged}"
+        <xrpb:RadialProgressBar Grid.Column="1" Grid.Row="1" Value= "{Binding ProgressbarPercent, UpdateSourceTrigger=PropertyChanged, Mode=Oneway}"
                                 VerticalAlignment="Top" Width="180" Height="180" Foreground="Blue"
                                 ArcWidth="45" OuterBackgroundBrush="White"/>
         <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,180,0,0" Text="진행률" Style="{StaticResource ProgressbarFontStlye}"/>
         <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,210,0,0" Style="{StaticResource ProgressbarFontStlye}">
             <!--{Binding Value2, UpdateSourceTrigger=PropertyChanged, Mode=Oneway}-->
-            <Run Text="{Binding SelectedTask.ProgressRate, UpdateSourceTrigger=PropertyChanged, Mode=Oneway}"/>
+            <Run Text="{Binding ProgressbarPercent, UpdateSourceTrigger=PropertyChanged, Mode=Oneway}"/>
             <Run Text="%"/>
         </TextBlock>
 
