@@ -30,12 +30,11 @@ namespace Manufacturing_Order_System.Views.UserControls
             {
                 switch (clickedRectangle.Name)
                 {
-                    //case "orderlist_menu":
-                    //    // 주문 목록 페이지로 이동
-                    //    var orderListPage = new OrderListWindow(); // OrderListWindow는 새 페이지
-                    //    orderListPage.Show();
-                    //    this.Close(); // 현재 창 닫기
-                    //    break;
+                    case "orderlist_menu":
+                        // 주문 목록 페이지로 이동
+                        OrderPage orderpage = new OrderPage();
+                        NavigationService.GetNavigationService(this)?.Navigate(orderpage);
+                        break;
 
                     case "workinginfo_menu":
                         // 작업 정보 페이지로 이동
