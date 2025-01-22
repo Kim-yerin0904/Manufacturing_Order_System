@@ -34,11 +34,21 @@
                 <DataGridTextColumn Header="접수일" Binding="{Binding OrderReceiptDate}" Width="*"/>
                 <DataGridTextColumn Header="상태" Binding="{Binding OrderStatus}" Width="*"/>
 
-                <DataGridTemplateColumn Header="보기" Width="*">
+                <DataGridTemplateColumn Header="상세" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="보기" 
+                            <Button Content="상세" 
                             Click="ViewDetailsButton_Click" 
+                            Tag="{Binding OrderId}" Width="60" Height="25" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="작업" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="작업" 
+                            Click="TaskTeamButton_Click" 
                             Tag="{Binding OrderId}" Width="60" Height="25" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
