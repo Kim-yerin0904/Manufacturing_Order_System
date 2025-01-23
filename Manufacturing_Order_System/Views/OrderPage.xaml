@@ -30,7 +30,7 @@
                 <DataGridTextColumn Header="제품명" Binding="{Binding ProductTypeName}" Width="*"/>
                 <DataGridTextColumn Header="수량" Binding="{Binding OrderQuantity}" Width="*"/>
                 <DataGridTextColumn Header="주문일" Binding="{Binding OrderDate}" Width="*"/>
-                <DataGridTextColumn Header="납기일" Binding="{Binding OrderDueDate}" Width="*"/>
+                <DataGridTextColumn Header="납기일" Binding="{Binding OrderDueDate, StringFormat={}{0:yyyy-MM-dd}}" Width="*"/>
                 <DataGridTextColumn Header="접수일" Binding="{Binding OrderReceiptDate}" Width="*"/>
                 <DataGridTextColumn Header="상태" Binding="{Binding OrderStatus}" Width="*"/>
 

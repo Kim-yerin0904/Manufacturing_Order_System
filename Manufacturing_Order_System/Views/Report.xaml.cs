@@ -135,7 +135,7 @@ namespace Manufacturing_Order_System
                     }
 
                     //판매 수익
-                    mySqlDataAdapter.SelectCommand = new MySqlCommand("SELECT pt.product_type_id,pt.product_type_name,COUNT(p.product_id) AS shipped_today_count,(COUNT(p.product_id) * pt.product_type_price) AS revenue FROM product_type pt LEFT JOIN product p ON pt.product_type_id = p.product_type_id WHERE p.product_shipping_date = '2025-01-20' GROUP BY pt.product_type_id, pt.product_type_name, pt.product_type_price;", App.connection);
+                    mySqlDataAdapter.SelectCommand = new MySqlCommand("SELECT pt.product_type_id,pt.product_type_name,COUNT(p.product_id) AS shipped_today_count,(COUNT(p.product_id) * pt.product_type_price) AS revenue FROM product_type pt LEFT JOIN product p ON pt.product_type_id = p.product_type_id WHERE p.product_shipping_date = curdate() GROUP BY pt.product_type_id, pt.product_type_name, pt.product_type_price;", App.connection);
                     viewModel.revenueDatas.Clear();
                     dataTable.Clear();
                     mySqlDataAdapter.Fill(dataTable);
