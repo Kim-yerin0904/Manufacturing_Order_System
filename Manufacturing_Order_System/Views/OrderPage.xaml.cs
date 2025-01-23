@@ -83,6 +83,11 @@ namespace Manufacturing_Order_System.Views
                     MessageBox.Show("작업팀을 선택하세요.", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
+                if(ViewModel.Orders[0].OrderDueDate < ViewModel.ProductCal[0].ExpectedDeliveryDate)
+                {
+                    MessageBox.Show("납기일까지 납품 불가능", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 if (ViewModel.ProductCal[0].ActualQuantity < ViewModel.ProductInfo[0].RequiredQuantity)
                 {
                     MessageBox.Show("재고 부족", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
