@@ -134,11 +134,11 @@ namespace Manufacturing_Order_System.Views
         {
             // 제품명 필터링
             List<string> selectedProducts = new List<string>();
-            if (sm_productA.IsChecked == true) selectedProducts.Add("'A'");
-            if (sm_productB.IsChecked == true) selectedProducts.Add("'B'");
-            if (sm_productC.IsChecked == true) selectedProducts.Add("'C'");
-            if (sm_productD.IsChecked == true) selectedProducts.Add("'D'");
-            if (sm_productE.IsChecked == true) selectedProducts.Add("'E'");
+            if (sm_productA.IsChecked == true) selectedProducts.Add("'ProductA'");
+            if (sm_productB.IsChecked == true) selectedProducts.Add("'ProductB'");
+            if (sm_productC.IsChecked == true) selectedProducts.Add("'ProductC'");
+            if (sm_productD.IsChecked == true) selectedProducts.Add("'ProductD'");
+            if (sm_productE.IsChecked == true) selectedProducts.Add("'ProductE'");
 
             // 제품명 체크박스가 모두 false일 경우 필터링된 데이터를 로드하지 않도록 설정
             if (selectedProducts.Count == 0)
@@ -167,10 +167,12 @@ namespace Manufacturing_Order_System.Views
             DateTime? manufactureDate = sm_ManufactureDatePicker.SelectedDate;
             DateTime? shipmentDate = sm_ShipmentDatePicker.SelectedDate;
 
-            // 필터링된 데이터 로드
-            LoadDatabaseData(productNameFilter: productNameFilter, statusFilter: statusFilter, manufactureDate: manufactureDate, shipmentDate: shipmentDate);
-        }
+            // 주문번호 필터링
+            string orderNumber = sm_orderNum.Text;
 
+            // 필터링된 데이터 로드
+            LoadDatabaseData(orderNumber, productNameFilter, statusFilter, manufactureDate, shipmentDate);
+        }
 
         private void sm_MDPick_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -230,7 +232,7 @@ namespace Manufacturing_Order_System.Views
             // 주문 번호가 비어 있지 않다면 필터링된 데이터를 로드
             if (!string.IsNullOrEmpty(orderNumber))
             {
-                LoadDatabaseData(orderNumber);
+                FilterProductsAndStatus(null, null);  // 주문번호 필터링을 포함한 전체 필터 적용
             }
             else
             {
