@@ -68,6 +68,14 @@
                               IsChecked="True"
                               Content="C"
                               Margin="10,0,10,0" />
+                    <CheckBox x:Name="sm_productD"
+                              IsChecked="True"
+                              Content="D"
+                              Margin="10,0,10,0" />
+                    <CheckBox x:Name="sm_productE"
+                              IsChecked="True"
+                              Content="E"
+                              Margin="10,0,10,0" />
                 </StackPanel>
                 <Label Content="생산일자" FontSize="16" FontWeight="Bold" Margin="0,0,0,2"/>
                 <StackPanel Orientation="Horizontal" Margin="7,0,0,5">
