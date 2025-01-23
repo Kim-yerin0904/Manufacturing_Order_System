@@ -133,6 +133,11 @@
                         <Run Text="제작기간(일): " FontWeight="Bold"/>
                         <Run Text="{Binding ProductCal[0].RequiredTime}" />
                     </TextBlock>
+
+                    <TextBlock>
+                        <Run Text="납기 가능일: " FontWeight="Bold"/>
+                        <Run Text="{Binding ProductCal[0].ExpectedDeliveryDate}" />
+                    </TextBlock>
                 </StackPanel>
 
                 <!-- 작업팀 선택 -->

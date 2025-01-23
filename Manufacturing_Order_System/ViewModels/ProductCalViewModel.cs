@@ -14,5 +14,8 @@ namespace Manufacturing_Order_System.ViewModels
 
         [ObservableProperty]
         private int actualQuantity;
+
+        [ObservableProperty]
+        private DateTime expectedDeliveryDate;
     }
 }
