@@ -42,10 +42,10 @@
                     <DataGridTextColumn Header="상태" Binding="{Binding 상태}" Width="50"/>
                     <DataGridTextColumn Header="제품 종류" Binding="{Binding 제품종류}" Width="60"/>
                     <DataGridTextColumn Header="제품 ID" Binding="{Binding 제품ID}" Width="60"/>
-                    <DataGridTextColumn Header="제품명" Binding="{Binding 제품명}" Width="60"/>
+                    <DataGridTextColumn Header="제품명" Binding="{Binding 제품명}" Width="70"/>
                     <DataGridTextColumn Header="생산일자" Binding="{Binding 생산일자, StringFormat={}{0:yyyy-MM-dd}}" Width="90"/>
                     <DataGridTextColumn Header="출고일자" Binding="{Binding 출고일자, StringFormat={}{0:yyyy-MM-dd}}" Width="90"/>
-                    <DataGridTextColumn Header="주문 ID" Binding="{Binding 주문ID}" Width="70"/>
+                    <DataGridTextColumn Header="주문 ID" Binding="{Binding 주문ID}" Width="65"/>
                     <DataGridTextColumn Header="불량 여부" Binding="{Binding 불량여부}" Width="60"/>
                 </DataGrid.Columns>
             </DataGrid>
