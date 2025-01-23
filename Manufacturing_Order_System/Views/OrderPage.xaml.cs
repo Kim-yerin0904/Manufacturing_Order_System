@@ -160,13 +160,15 @@ namespace Manufacturing_Order_System.Views
             {
                 ViewModel.ProductCal.Clear();
 
-                int rt = (int)Math.Ceiling((double)inputQuantity / 100 * ViewModel.ProductInfo[0].ProductionTime);
+                int rt = (int)Math.Ceiling((double)inputQuantity / ViewModel.ProductInfo[0].ProductionTime);
                 int aq = rt * ViewModel.ProductInfo[0].ProductionTime;
+                DateTime edd = DateTime.Today.AddDays(rt + 1);
 
                 ViewModel.ProductCal.Add(new ProductCalViewModel
                 {
                     ActualQuantity = aq,
-                    RequiredTime = rt
+                    RequiredTime = rt,
+                    ExpectedDeliveryDate = edd
                 });
             }
         }
