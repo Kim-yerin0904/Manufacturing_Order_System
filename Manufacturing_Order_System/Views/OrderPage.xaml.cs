@@ -83,11 +83,16 @@ namespace Manufacturing_Order_System.Views
                     MessageBox.Show("작업팀을 선택하세요.", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
+                if (ViewModel.ProductCal[0].ActualQuantity < ViewModel.ProductInfo[0].RequiredQuantity)
+                {
+                    MessageBox.Show("재고 부족", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
                 int taskteamId = selectedTaskteam.TaskteamId;
                 int actualQuantity = ViewModel.ProductCal[0].ActualQuantity;
 
-                int orderId = ViewModel.OrderDetail[0].selectedOrderId;
+                int orderId = ViewModel.OrderDetail[0].SelectedOrderId;
 
                 if (_manager.OpenMySqlConnection())
                 {
