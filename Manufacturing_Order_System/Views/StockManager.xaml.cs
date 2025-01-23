@@ -30,9 +30,13 @@ namespace Manufacturing_Order_System.Views
             sm_productA.Checked += FilterProductsAndStatus;
             sm_productB.Checked += FilterProductsAndStatus;
             sm_productC.Checked += FilterProductsAndStatus;
+            sm_productD.Checked += FilterProductsAndStatus;
+            sm_productE.Checked += FilterProductsAndStatus;
             sm_productA.Unchecked += FilterProductsAndStatus;
             sm_productB.Unchecked += FilterProductsAndStatus;
             sm_productC.Unchecked += FilterProductsAndStatus;
+            sm_productD.Unchecked += FilterProductsAndStatus;
+            sm_productE.Unchecked += FilterProductsAndStatus;
 
             // 상태 체크박스 이벤트 핸들러
             sm_Unstoring.Checked += FilterProductsAndStatus;
@@ -133,6 +137,8 @@ namespace Manufacturing_Order_System.Views
             if (sm_productA.IsChecked == true) selectedProducts.Add("'A'");
             if (sm_productB.IsChecked == true) selectedProducts.Add("'B'");
             if (sm_productC.IsChecked == true) selectedProducts.Add("'C'");
+            if (sm_productD.IsChecked == true) selectedProducts.Add("'D'");
+            if (sm_productE.IsChecked == true) selectedProducts.Add("'E'");
 
             // 제품명 체크박스가 모두 false일 경우 필터링된 데이터를 로드하지 않도록 설정
             if (selectedProducts.Count == 0)
