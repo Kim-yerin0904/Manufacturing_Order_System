@@ -44,6 +44,16 @@ namespace Manufacturing_Order_System.ViewModels
 
         }
 
+        private static string GetOrderStatusText(int status) => status switch
+        {
+            0 => "접수대기",
+            1 => "접수완료",
+            2 => "생산중",
+            3 => "생산완료",
+            4 => "출고",
+            5 => "거절",
+            _ => "Unknown"
+        };
         private void Workinginfo_Loaded(int selected_orderid)
         {
             if (manager.OpenMySqlConnection() == true)
