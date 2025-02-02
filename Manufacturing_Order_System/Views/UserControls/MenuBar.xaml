@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Manufacturing_Order_System.Views.UserControls.MenuBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Manufacturing_Order_System.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="800">
+    <Grid>
+        <!--상단 메뉴바-->
+        <Rectangle x:Name="orderlist_menu" Margin="5,0,0,0" Style="{StaticResource Menubar}" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"/>
+        <TextBlock Text="주문 목록" Margin="20,5,0,0" Style="{StaticResource Menubar_text}"></TextBlock>
+        <Rectangle x:Name="workinginfo_menu" Margin="115,0,0,0" Style="{StaticResource Menubar}" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"/>
+        <TextBlock Text="작업 정보" Margin="135,5,0,0" Style="{StaticResource Menubar_text}" ></TextBlock>
+        <Rectangle x:Name="stocklist_menu" Margin="225,0,0,0" Style="{StaticResource Menubar}" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"/>
+        <TextBlock Text="재고 목록" Margin="245,5,0,0" Style="{StaticResource Menubar_text}"></TextBlock>
+        <Rectangle x:Name="dailyreport_menu" Margin="335,0,0,0" Style="{StaticResource Menubar}" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"/>
+        <TextBlock Text="일일 실적" Margin="355,5,0,0" Style="{StaticResource Menubar_text}"></TextBlock>
+
+    </Grid>
+</UserControl>

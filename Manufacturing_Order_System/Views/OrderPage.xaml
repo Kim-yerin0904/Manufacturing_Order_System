@@ -1,0 +1,167 @@
+﻿<Page x:Class="Manufacturing_Order_System.Views.OrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:vm="clr-namespace:Manufacturing_Order_System.ViewModels"
+      xmlns:local="clr-namespace:Manufacturing_Order_System.Views.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900"
+      Title="OrderPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <!--상단 메뉴바-->
+        <local:MenuBar/>
+        <!--주문 목록 테이블-->
+        <DataGrid x:Name="OrderDataGrid" ItemsSource="{Binding Orders}" AutoGenerateColumns="False" 
+          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Grid.Column="0" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="주문 ID" Binding="{Binding OrderId}" Width="*"/>
+                <DataGridTextColumn Header="고객 ID" Binding="{Binding CustomerId}" Width="*"/>
+                <DataGridTextColumn Header="제품명" Binding="{Binding ProductTypeName}" Width="*"/>
+                <DataGridTextColumn Header="수량" Binding="{Binding OrderQuantity}" Width="*"/>
+                <DataGridTextColumn Header="주문일" Binding="{Binding OrderDate}" Width="*"/>
+                <DataGridTextColumn Header="납기일" Binding="{Binding OrderDueDate, StringFormat={}{0:yyyy-MM-dd}}" Width="*"/>
+                <DataGridTextColumn Header="접수일" Binding="{Binding OrderReceiptDate}" Width="*"/>
+                <DataGridTextColumn Header="상태" Binding="{Binding OrderStatus}" Width="*"/>
+
+                <DataGridTemplateColumn Header="상세" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="상세" 
+                            Click="ViewDetailsButton_Click" 
+                            Tag="{Binding OrderId}" Width="60" Height="25" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="작업" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="작업" 
+                            Click="TaskTeamButton_Click" 
+                            Tag="{Binding OrderId}" Width="60" Height="25" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Details box -->
+        <Border Grid.Column="1"  Grid.Row="1"
+        Background="White" 
+        Margin="10" 
+        CornerRadius="10"
+        Padding="10">
+            <StackPanel>
+                <!-- Customer Info -->
+                <StackPanel>
+                    <TextBlock Text="고객 정보" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+                        <TextBlock>
+            <Run Text="이름: " FontWeight="Bold"/>
+            <Run Text="{Binding CustomerInfo[0].CustomerName}" />
+                        </TextBlock>
+                        <TextBlock>
+            <Run Text="연락처: " FontWeight="Bold"/>
+            <Run Text="{Binding CustomerInfo[0].CustomerContact}" />
+                        </TextBlock>
+                        <TextBlock>
+            <Run Text="이메일: " FontWeight="Bold"/>
+            <Run Text="{Binding CustomerInfo[0].CustomerEmail}" />
+                        </TextBlock>
+                        <TextBlock>
+            <Run Text="주소: " FontWeight="Bold"/>
+            <Run Text="{Binding CustomerInfo[0].CustomerAddress}" />
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+
+
+                <!-- Product Info -->
+                <TextBlock Text="주문제품 정보" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+                    <TextBlock>
+            <Run Text="제품명: " FontWeight="Bold"/>
+            <Run Text="{Binding ProductInfo[0].ProductName}" />
+                    </TextBlock>
+                    <TextBlock>
+            <Run Text="주문수량: " FontWeight="Bold"/>
+            <Run Text="{Binding ProductInfo[0].OrderQuantity}" />
+                    </TextBlock>
+                    <TextBlock>
+            <Run Text="재고수량: " FontWeight="Bold"/>
+            <Run Text="{Binding ProductInfo[0].StockQuantity}" />
+                    </TextBlock>
+                    <TextBlock>
+            <Run Text="생산가능수량(1일): " FontWeight="Bold"/>
+            <Run Text="{Binding ProductInfo[0].ProductionTime}" />
+                    </TextBlock>
+                </StackPanel>
+
+                <!-- 작업수량 입력 -->
+                <TextBlock Text="작업수량 입력" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                    <TextBox x:Name="InputQuantityTextBox" Width="100" Margin="0,0,10,0" />
+                    <Button Content="확인" Click="OnConfirmQuantityButtonClick" Width="40" />
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+                    <TextBlock>
+                        <Run Text="남은일수: " FontWeight="Bold"/>
+                        <Run Text="{Binding ProductInfo[0].RemainingDays}" />
+                    </TextBlock>
+                    <TextBlock>
+                        <Run Text="필요 최소제품수량: " FontWeight="Bold"/>
+                        <Run Text="{Binding ProductInfo[0].RequiredQuantity}" />
+                    </TextBlock>
+                    <TextBlock>
+                        <Run Text="실제 제작수량: " FontWeight="Bold"/>
+                        <Run Text="{Binding ProductCal[0].ActualQuantity}" />
+                    </TextBlock>
+
+                    <TextBlock>
+                        <Run Text="제작기간(일): " FontWeight="Bold"/>
+                        <Run Text="{Binding ProductCal[0].RequiredTime}" />
+                    </TextBlock>
+
+                    <TextBlock>
+                        <Run Text="납기 가능일: " FontWeight="Bold"/>
+                        <Run Text="{Binding ProductCal[0].ExpectedDeliveryDate}" />
+                    </TextBlock>
+                </StackPanel>
+
+                <!-- 작업팀 선택 -->
+                <TextBlock Text="작업팀 선택" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                <ItemsControl ItemsSource="{Binding Taskteams}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton Content="{Binding TaskteamName}" 
+                         GroupName="Teams"
+                         IsEnabled="{Binding IsEnabled}"
+                         IsChecked="{Binding IsSelect}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <!-- 수락/거절 버튼 -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="수락" Background="LightBlue" Foreground="White" Width="50" Margin="10,10" 
+                    Click="OnAcceptButtonClick"/>
+                    <Button Content="거절" Background="Tomato" Foreground="White" Width="50" Margin="10,10" 
+                    Click="OnRejectButtonClick"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Page>

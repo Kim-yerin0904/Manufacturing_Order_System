@@ -1,0 +1,83 @@
+﻿<Page x:Class="Manufacturing_Order_System.Views.WorkingInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
+        xmlns:c="clr-namespace:Manufacturing_Order_System.Converters"
+        xmlns:local="clr-namespace:Manufacturing_Order_System.Views.UserControls"
+        mc:Ignorable="d"
+        Title="작업 정보" Height="600" Width="900">
+    <Page.Resources>
+        <c:InttoOrderStatus x:Key="InttoOrderStatus"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="700"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+       
+        <!--상단 메뉴바-->
+        <local:MenuBar/>
+
+        <!--작업 완성률-->
+        <!--{Binding Value2, UpdateSourceTrigger=PropertyChanged}-->
+        <xrpb:RadialProgressBar Grid.Column="1" Grid.Row="1" Value= "{Binding ProgressbarPercent, UpdateSourceTrigger=PropertyChanged, Mode=Oneway}"
+                                VerticalAlignment="Top" Width="180" Height="180" Foreground="Blue"
+                                ArcWidth="45" OuterBackgroundBrush="White"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,180,0,0" Text="진행률" Style="{StaticResource ProgressbarFontStlye}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,210,0,0" Style="{StaticResource ProgressbarFontStlye}">
+            <!--{Binding Value2, UpdateSourceTrigger=PropertyChanged, Mode=Oneway}-->
+            <Run Text="{Binding ProgressbarPercent, UpdateSourceTrigger=PropertyChanged, Mode=Oneway}"/>
+            <Run Text="%"/>
+        </TextBlock>
+
+        <!-- 작업 정보 바탕&제목 -->
+        <Rectangle Grid.Row="1" Grid.Column="0" Fill="#E6E6E6" RadiusY="20" RadiusX="20" Margin="10,45,5,10"/>
+        <Label Grid.Row="1" Grid.Column="0" Margin="25,0,0,0" Content="주문 별 작업 정보" Style="{StaticResource TitleStyle}"/>
+        
+        <!-- 주문 정보 표-->
+        <Label Grid.Row="1" Grid.Column="0" Margin="45,70,0,0" Content="[주문 정보]" Style="{StaticResource SubheadingStlye}"/>
+        <ListView Grid.Row="1" Grid.Column="0" x:Name="OrderInfo" ItemsSource="{Binding orders}" Margin="45,100,20,0" Style="{StaticResource workinginfoTableStyle}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="주문 ID" DisplayMemberBinding="{Binding OrderId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="고객 ID" DisplayMemberBinding="{Binding CustomerId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="주문 제품 ID" DisplayMemberBinding="{Binding ProductTypeId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="주문 수량" DisplayMemberBinding="{Binding OrderQuantity, Mode=OneWay}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="납기일" DisplayMemberBinding="{Binding OrderDueDate}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="주문 상태" DisplayMemberBinding="{Binding OrderStatus, Converter={StaticResource InttoOrderStatus}, Mode=OneWay}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!--작업 정보표-->
+        <Label Grid.Row="1" Grid.Column="0" Content="[작업 정보]" Margin="45,185,0,0" Style="{StaticResource SubheadingStlye}"/>
+        <ListView Grid.Row="1" Grid.Column="0" x:Name="WorkingTable" ItemsSource="{Binding tasks}" Margin="45,215,20,0" Style="{StaticResource workinginfoTableStyle}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="작업 ID" DisplayMemberBinding="{Binding TaskId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="담당 팀" DisplayMemberBinding="{Binding TaskteamId}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="총 작업 수량" DisplayMemberBinding="{Binding TaskProductionQuantity}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="작업 완료 수량" DisplayMemberBinding="{Binding TaskCompletedQuantity , Mode=OneWay}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!--담당 팀 기본 정보표-->
+        <Label Grid.Row="1" Grid.Column="0" Content="[작업 팀 정보]" Margin="370,185,0,0" Style="{StaticResource SubheadingStlye}"/>
+        <ListView Grid.Row="1" Grid.Column="0" x:Name="TeamInfo" ItemsSource="{Binding workers}" Margin="370,215,20,0" Style="{StaticResource workinginfoTableStyle}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="이름" DisplayMemberBinding="{Binding Name}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="직책" DisplayMemberBinding="{Binding WorkerPosition}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                    <GridViewColumn Header="연락처" DisplayMemberBinding="{Binding Contact}" HeaderContainerStyle="{StaticResource workinginfoHeaderStyle}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Page>
