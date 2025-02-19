@@ -15,7 +15,7 @@ namespace Manufacturing_Order_System
         {
             Debug.WriteLine("DataBase Initialize");
 
-            string connectionPath = $"SERVER=localhost;DATABASE=wpf;UID=root;PASSWORD=dkssud5%A";
+            string connectionPath = $"SERVER=localhost;DATABASE=wpf;UID=root;PASSWORD=비밀번호";
             App.connection = new MySqlConnection(connectionPath);
         }
 
